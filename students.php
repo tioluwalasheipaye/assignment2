@@ -1,7 +1,6 @@
 <?php
 header("Content-Type: application/json");
 
-// XAMPP defaults
 $host = "localhost";
 $dbname = "college";
 $user = "root";

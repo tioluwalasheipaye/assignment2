@@ -1,6 +1,3 @@
--- Student registration database
--- Run in phpMyAdmin or:  mysql -u root < database.sql
-
 CREATE DATABASE IF NOT EXISTS college;
 
 USE college;
@@ -13,7 +10,6 @@ CREATE TABLE IF NOT EXISTS students (
     program VARCHAR(100)
 );
 
--- Sample rows (optional)
 INSERT INTO students (firstName, lastName, email, program) VALUES
 ('Mary', 'Karim', 'mary.karim@college.edu', 'Computer Science'),
 ('Rahul', 'Tylor', 'rahul.tylor@college.edu', 'Software Engineering');

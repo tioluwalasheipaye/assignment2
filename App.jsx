@@ -1,13 +1,8 @@
 function App() {
   const { useState } = React;
 
-  // Page 1 = Student Registration, Page 2 = Student Directory.
   const [page, setPage] = useState("register");
-
-  // Bumped after a successful registration so StudentList re-fetches.
   const [refresh, setRefresh] = useState(0);
-
-  // Dev-only admin flag (see dev-temp.jsx); stays false in the delivered app.
   const [admin, setAdmin] = useState(false);
 
   function handleNavigate(nextPage) {

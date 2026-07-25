@@ -1,13 +1,11 @@
 <?php
 header("Content-Type: application/json");
 
-// XAMPP defaults
 $host = "localhost";
 $dbname = "college";
 $user = "root";
 $password = "";
 
-// Read the JSON body sent by the React form
 $raw = file_get_contents("php://input");
 $data = json_decode($raw, true);
 
@@ -21,7 +19,6 @@ $lastName  = isset($data["lastName"])  ? trim($data["lastName"])  : "";
 $email     = isset($data["email"])     ? trim($data["email"])     : "";
 $program   = isset($data["program"])   ? trim($data["program"])   : "";
 
-// Server-side validation (never trust the client)
 if ($firstName === "" || $lastName === "" || $email === "" || $program === "") {
     echo json_encode(["status" => "error"]);
     exit;

@@ -1,16 +1,7 @@
-// ============================================================================
-// DEVELOPMENT ONLY - not part of the assignment deliverables.
-// Delete this file together with dev-temp.php before submitting/deploying,
-// and remove the two dev <script> lines from index.html.
-// App.jsx only renders this when AdminTools exists, so nothing breaks if the
-// file is gone.
-// ============================================================================
-
 function AdminTools(props) {
   const [open, setOpen] = React.useState(false);
 
   function toggle() {
-    // Closing admin mode returns to the public registration page.
     if (open && props.page !== "register") {
       props.onNavigate("register");
     }
@@ -58,7 +49,6 @@ function AdminTools(props) {
   );
 }
 
-// Admin styling lives here too, so style.css stays clean for marking.
 (function () {
   const css = [
     ".admin-toggle { position: fixed; top: 8px; right: 8px; padding: 3px 9px;",

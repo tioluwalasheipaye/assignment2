@@ -15,7 +15,6 @@ function Header(props) {
           Student Registration
         </span>
 
-        {/* The directory is staff-only, so the tab shows in admin mode only. */}
         {props.admin && (
           <span
             className={props.page === "directory" ? "tab active" : "tab"}
