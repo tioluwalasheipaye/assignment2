@@ -20,5 +20,52 @@
   <script type="text/babel" src="StudentForm.jsx"></script>
   <script type="text/babel" src="StudentList.jsx"></script>
   <script type="text/babel" src="App.jsx"></script>
+
+  <!-- Dev live-reload: polls dev.php and refreshes when a file changes.
+       Localhost only. Delete this block (and dev.php) before submitting. -->
+  <script>
+    (function () {
+      var host = location.hostname;
+      if (host !== "localhost" && host !== "127.0.0.1") {
+        return;
+      }
+
+      var current = null;
+
+      var warned = false;
+
+      function check() {
+        fetch("dev-temp.php?t=" + Date.now(), { cache: "no-store" })
+          .then(function (response) { return response.text(); })
+          .then(function (text) {
+            var data;
+            try {
+              data = JSON.parse(text);
+            } catch (e) {
+              if (!warned) {
+                warned = true;
+                console.error("[dev] dev-temp.php did not return JSON - live reload is off.");
+              }
+              return;
+            }
+
+            if (!data.version) {
+              return;
+            }
+            if (current === null) {
+              current = data.version;
+              console.log("[dev] watching for file changes...");
+            } else if (current !== data.version) {
+              console.log("[dev] change detected - reloading");
+              location.reload();
+            }
+          })
+          .catch(function () { /* server restarting - ignore */ });
+      }
+
+      check();
+      setInterval(check, 1000);
+    })();
+  </script>
 </body>
 </html>

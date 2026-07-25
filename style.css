@@ -1,4 +1,4 @@
-/* Student Registration System - vanilla CSS only */
+/* Quest-style student portal - vanilla CSS only */
 
 * {
   box-sizing: border-box;
@@ -6,9 +6,19 @@
 
 body {
   margin: 0;
-  font-family: Segoe UI, Arial, Helvetica, sans-serif;
-  background-color: #eef2f7;
-  color: #22303f;
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background-color: #dcdcdc;
+  color: #1a1a1a;
+}
+
+a {
+  color: #16548a;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .app {
@@ -17,174 +27,393 @@ body {
   min-height: 100vh;
 }
 
-/* Header and footer */
+/* ---------- Masthead ---------- */
 .header {
-  background-color: #1f4e79;
+  background-color: #000000;
+}
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 18px;
+  border-bottom: 4px solid #ffd100;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.brand-mark {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #ffd100;
+}
+
+.brand-sub {
+  font-size: 11px;
+  color: #e2e2e2;
+}
+
+.masthead-meta {
+  font-size: 11px;
+  color: #e2e2e2;
+}
+
+.masthead-meta a {
+  color: #ffd100;
+}
+
+.divider {
+  color: #7a7a7a;
+  margin: 0 6px;
+}
+
+/* ---------- Tab strip ---------- */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #2f2f2f;
+  padding: 0 12px;
+}
+
+.tab {
+  padding: 7px 16px;
+  font-size: 11px;
+  color: #dddddd;
+  border-right: 1px solid #4a4a4a;
+  cursor: pointer;
+}
+
+.tab:hover {
+  background-color: #4a4a4a;
   color: #ffffff;
-  padding: 24px 20px;
-  text-align: center;
 }
 
-.header h1 {
-  margin: 0;
-  font-size: 28px;
-  letter-spacing: 1px;
+.tab.active {
+  background-color: #f0f0f0;
+  color: #000000;
+  font-weight: bold;
 }
 
-.footer {
-  background-color: #1f4e79;
-  color: #ffffff;
-  padding: 16px 20px;
-  text-align: center;
-  margin-top: auto;
+.breadcrumb {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #b6b6b6;
+  padding: 6px 18px;
+  font-size: 11px;
+  color: #444444;
 }
 
-.footer p {
-  margin: 0;
-  font-size: 14px;
-}
-
-/* Main flexbox layout */
+/* ---------- Layout ---------- */
 .content {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
-  gap: 24px;
-  padding: 30px 20px;
-  max-width: 1100px;
+  gap: 18px;
+  padding: 18px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
 }
 
-/* Card style */
-.card {
-  flex: 1 1 380px;
+/* ---------- Panels ---------- */
+.panel {
+  flex: 1 1 420px;
   background-color: #ffffff;
-  border-radius: 10px;
-  padding: 24px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  border: 1px solid #9aa4ad;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.card h2 {
-  margin-top: 0;
-  margin-bottom: 18px;
-  font-size: 20px;
-  border-bottom: 2px solid #1f4e79;
-  padding-bottom: 8px;
+.panel-head {
+  background-color: #16548a;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 7px 12px;
+  border-bottom: 2px solid #ffd100;
 }
 
-/* Form */
-.field {
+.panel-body {
+  padding: 14px;
+}
+
+.instructions {
+  margin: 0 0 14px 0;
+  font-size: 11px;
+  color: #444444;
+  line-height: 1.5;
+}
+
+.req {
+  color: #b00020;
+  font-weight: bold;
+}
+
+/* ---------- Form ---------- */
+.field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 6px;
+  border-bottom: 1px solid #e4e7ea;
+}
+
+.field-row:nth-child(even) {
+  background-color: #f6f8fa;
+}
+
+.field-row label {
+  flex: 0 0 150px;
+  font-size: 11px;
+  font-weight: bold;
+  padding-top: 5px;
+  color: #22303f;
+}
+
+.field-input {
+  flex: 1 1 200px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
 }
 
-.field label {
-  margin-bottom: 6px;
-  font-weight: bold;
-  font-size: 14px;
+.field-input input {
+  padding: 4px 6px;
+  border: 1px solid #7f8c99;
+  background-color: #ffffff;
+  font-family: inherit;
+  font-size: 12px;
 }
 
-.field input {
-  padding: 10px;
-  border: 1px solid #c3ccd8;
-  border-radius: 6px;
-  font-size: 15px;
-}
-
-.field input:focus {
+.field-input input:focus {
   outline: none;
-  border-color: #1f4e79;
-  box-shadow: 0 0 0 2px rgba(31, 78, 121, 0.2);
+  border-color: #16548a;
+  background-color: #fffbe6;
 }
 
 .error {
-  color: #c0392b;
-  font-size: 13px;
-  margin-top: 5px;
+  color: #b00020;
+  font-size: 11px;
+  margin-top: 4px;
 }
 
-.message {
-  margin-top: 16px;
-  padding: 10px;
-  border-radius: 6px;
-  background-color: #e6f0fa;
-  border-left: 4px solid #1f4e79;
-  font-size: 14px;
+.form-actions {
+  margin-top: 14px;
 }
 
-/* Button with hover effect */
+.notice {
+  font-size: 11px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  border: 1px solid #9aa4ad;
+}
+
+.notice.ok {
+  background-color: #eaf5ea;
+  border-left: 5px solid #2e7d32;
+}
+
+.notice.bad {
+  background-color: #fdeaea;
+  border-left: 5px solid #b00020;
+}
+
+/* ---------- Buttons ---------- */
 button {
-  width: 100%;
-  padding: 12px;
-  background-color: #1f4e79;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.15s ease;
 }
 
-button:hover {
-  background-color: #2d6ca8;
-  transform: translateY(-2px);
+.quest-btn {
+  padding: 5px 22px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000000;
+  background-color: #ffd100;
+  border: 1px solid #9a7f00;
+  transition: background-color 0.2s ease;
 }
 
-/* Table with row hover effect */
+.quest-btn:hover {
+  background-color: #ffe463;
+}
+
+/* ---------- Table ---------- */
 .student-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 15px;
+  font-size: 11px;
 }
 
 .student-table th,
 .student-table td {
   text-align: left;
-  padding: 10px 12px;
-  border-bottom: 1px solid #dde3ea;
+  padding: 6px 8px;
+  border: 1px solid #c6ccd2;
 }
 
 .student-table th {
-  background-color: #1f4e79;
+  background-color: #16548a;
   color: #ffffff;
 }
 
 .student-table tbody tr {
+  background-color: #ffffff;
   transition: background-color 0.2s ease;
 }
 
-.student-table tbody tr:hover {
-  background-color: #dbe7f3;
+.student-table tbody tr:nth-child(even) {
+  background-color: #f6f8fa;
 }
 
-/* Mobile responsiveness */
+.student-table tbody tr:hover {
+  background-color: #fff4c2;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  background-color: #000000;
+  color: #cfcfcf;
+  border-top: 4px solid #ffd100;
+  padding: 12px 18px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer-links {
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+
+.footer-links a {
+  color: #ffd100;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 10px;
+  color: #9a9a9a;
+}
+
+/* ---------- Admin / test mode ---------- */
+.admin-toggle {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  padding: 3px 9px;
+  font-size: 10px;
+  color: #ffd100;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid #ffd100;
+  z-index: 20;
+}
+
+.admin-toggle:hover {
+  background-color: #ffd100;
+  color: #000000;
+}
+
+.admin-panel {
+  position: fixed;
+  top: 34px;
+  right: 8px;
+  width: 180px;
+  background-color: #ffffff;
+  border: 1px solid #9aa4ad;
+  padding: 8px;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+}
+
+.admin-title {
+  display: block;
+  font-size: 10px;
+  font-weight: bold;
+  color: #16548a;
+  margin-bottom: 7px;
+}
+
+.admin-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-btn {
+  width: 100%;
+  padding: 4px;
+  font-size: 10px;
+  color: #ffffff;
+  background-color: #5c7891;
+  border: 1px solid #46596b;
+}
+
+.admin-btn:hover {
+  background-color: #16548a;
+}
+
+.admin-btn.active {
+  background-color: #16548a;
+  font-weight: bold;
+}
+
+.admin-links {
+  display: flex;
+  flex-direction: column;
+  margin-top: 7px;
+  font-size: 10px;
+}
+
+.admin-links a {
+  padding: 2px 0;
+}
+
+/* ---------- Mobile ---------- */
 @media (max-width: 700px) {
   .content {
     flex-direction: column;
-    padding: 20px 12px;
-    gap: 18px;
+    padding: 12px;
+    gap: 12px;
   }
 
-  .card {
+  .panel {
     flex: 1 1 auto;
     width: 100%;
-    padding: 18px;
   }
 
-  .header h1 {
-    font-size: 22px;
+  .masthead {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .student-table {
-    font-size: 13px;
+  .tabs {
+    padding: 0;
   }
 
-  .student-table th,
-  .student-table td {
-    padding: 8px 6px;
+  .tab {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 7px 8px;
+  }
+
+  .field-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .field-row label {
+    flex: 1 1 auto;
+    padding-top: 0;
+  }
+
+  .admin-panel {
+    width: 150px;
   }
 }

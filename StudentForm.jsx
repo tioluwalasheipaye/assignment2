@@ -7,6 +7,7 @@ function StudentForm(props) {
   const [program, setProgram] = useState("");
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
 
   function validate() {
     const found = {};
@@ -55,7 +56,8 @@ function StudentForm(props) {
       })
       .then(function (data) {
         if (data.status === "success") {
-          setMessage("Student registered successfully!");
+          setMessageType("ok");
+          setMessage("Your registration request has been submitted successfully.");
           setFirstName("");
           setLastName("");
           setEmail("");
@@ -64,67 +66,62 @@ function StudentForm(props) {
             props.onRegistered();
           }
         } else {
-          setMessage("Registration failed. Please check your details.");
+          setMessageType("bad");
+          setMessage("Registration failed. Please review your details and try again.");
         }
       })
       .catch(function () {
-        setMessage("Could not reach the server.");
+        setMessageType("bad");
+        setMessage("Could not reach the server. Please try again later.");
       });
   }
 
+  function field(id, label, value, setValue) {
+    return (
+      <div className="field-row">
+        <label htmlFor={id}>
+          {label} <span className="req">*</span>
+        </label>
+        <div className="field-input">
+          <input
+            id={id}
+            type="text"
+            value={value}
+            onChange={function (e) { setValue(e.target.value); }}
+          />
+          {errors[id] && <span className="error">{errors[id]}</span>}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <section className="card">
-      <h2>Register a Student</h2>
+    <section className="panel">
+      <div className="panel-head">Student Registration</div>
 
-      <form onSubmit={handleSubmit} noValidate>
-        <div className="field">
-          <label htmlFor="firstName">First Name</label>
-          <input
-            id="firstName"
-            type="text"
-            value={firstName}
-            onChange={function (e) { setFirstName(e.target.value); }}
-          />
-          {errors.firstName && <span className="error">{errors.firstName}</span>}
-        </div>
+      <div className="panel-body">
+        <p className="instructions">
+          Complete all required fields marked with <span className="req">*</span> and
+          select <strong>Submit</strong> to register.
+        </p>
 
-        <div className="field">
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            id="lastName"
-            type="text"
-            value={lastName}
-            onChange={function (e) { setLastName(e.target.value); }}
-          />
-          {errors.lastName && <span className="error">{errors.lastName}</span>}
-        </div>
+        {message && (
+          <div className={messageType === "ok" ? "notice ok" : "notice bad"}>
+            {message}
+          </div>
+        )}
 
-        <div className="field">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="text"
-            value={email}
-            onChange={function (e) { setEmail(e.target.value); }}
-          />
-          {errors.email && <span className="error">{errors.email}</span>}
-        </div>
+        <form onSubmit={handleSubmit} noValidate>
+          {field("firstName", "First Name", firstName, setFirstName)}
+          {field("lastName", "Last Name", lastName, setLastName)}
+          {field("email", "Email Address", email, setEmail)}
+          {field("program", "Program of Study", program, setProgram)}
 
-        <div className="field">
-          <label htmlFor="program">Program</label>
-          <input
-            id="program"
-            type="text"
-            value={program}
-            onChange={function (e) { setProgram(e.target.value); }}
-          />
-          {errors.program && <span className="error">{errors.program}</span>}
-        </div>
-
-        <button type="submit">Register</button>
-      </form>
-
-      {message && <p className="message">{message}</p>}
+          <div className="form-actions">
+            <button type="submit" className="quest-btn">Submit</button>
+          </div>
+        </form>
+      </div>
     </section>
   );
 }
