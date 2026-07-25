@@ -124,12 +124,13 @@ a:hover {
 }
 
 .card-head {
-  background-color: #16548a;
-  color: #ffffff;
+  background-color: #000000;
+  color: #ffd100;
   font-weight: bold;
   font-size: 12px;
+  letter-spacing: 0.5px;
   padding: 7px 12px;
-  border-bottom: 2px solid #ffd100;
+  border-bottom: 3px solid #ffd100;
 }
 
 .card-body {
@@ -274,12 +275,14 @@ button {
 .student-table td {
   text-align: left;
   padding: 6px 8px;
-  border: 1px solid #c6ccd2;
+  border: 1px solid #d7cba0;
 }
 
 .student-table th {
-  background-color: #16548a;
-  color: #ffffff;
+  background-color: #000000;
+  color: #ffd100;
+  border-color: #000000;
+  border-bottom: 3px solid #ffd100;
 }
 
 .student-table tbody tr {
@@ -288,11 +291,11 @@ button {
 }
 
 .student-table tbody tr:nth-child(even) {
-  background-color: #f6f8fa;
+  background-color: #fdf6d8;
 }
 
 .student-table tbody tr:hover {
-  background-color: #fff4c2;
+  background-color: #ffd100;
 }
 
 .footer {
