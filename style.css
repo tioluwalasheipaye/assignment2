@@ -101,14 +101,6 @@ a:hover {
   font-weight: bold;
 }
 
-.breadcrumb {
-  background-color: #f0f0f0;
-  border-bottom: 1px solid #b6b6b6;
-  padding: 6px 18px;
-  font-size: 11px;
-  color: #444444;
-}
-
 /* ---------- Layout ---------- */
 .content {
   flex: 1;
@@ -123,15 +115,21 @@ a:hover {
   margin: 0 auto;
 }
 
-/* ---------- Panels ---------- */
-.panel {
+/* ---------- Cards ---------- */
+.card {
   flex: 1 1 420px;
+  max-width: 620px;
   background-color: #ffffff;
   border: 1px solid #9aa4ad;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s ease;
 }
 
-.panel-head {
+.card:hover {
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.28);
+}
+
+.card-head {
   background-color: #16548a;
   color: #ffffff;
   font-weight: bold;
@@ -140,7 +138,7 @@ a:hover {
   border-bottom: 2px solid #ffd100;
 }
 
-.panel-body {
+.card-body {
   padding: 14px;
 }
 
@@ -184,12 +182,42 @@ a:hover {
   flex-direction: column;
 }
 
+.input-wrap {
+  position: relative;
+  display: block;
+}
+
 .field-input input {
+  width: 100%;
   padding: 4px 6px;
   border: 1px solid #7f8c99;
   background-color: #ffffff;
   font-family: inherit;
   font-size: 12px;
+}
+
+/* Hover hints: the format expected in each field, and on the * marker */
+.input-wrap[data-hint]:hover::after,
+.req[data-hint]:hover::after {
+  content: attr(data-hint);
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  margin-bottom: 5px;
+  padding: 5px 8px;
+  background-color: #2f2f2f;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: normal;
+  white-space: nowrap;
+  border-radius: 3px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
+  z-index: 10;
+}
+
+.req[data-hint] {
+  position: relative;
+  cursor: help;
 }
 
 .field-input input:focus {
@@ -302,79 +330,6 @@ button {
   color: #9a9a9a;
 }
 
-/* ---------- Admin / test mode ---------- */
-.admin-toggle {
-  position: fixed;
-  top: 8px;
-  right: 8px;
-  padding: 3px 9px;
-  font-size: 10px;
-  color: #ffd100;
-  background-color: rgba(255, 255, 255, 0.12);
-  border: 1px solid #ffd100;
-  z-index: 20;
-}
-
-.admin-toggle:hover {
-  background-color: #ffd100;
-  color: #000000;
-}
-
-.admin-panel {
-  position: fixed;
-  top: 34px;
-  right: 8px;
-  width: 180px;
-  background-color: #ffffff;
-  border: 1px solid #9aa4ad;
-  padding: 8px;
-  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.3);
-  z-index: 20;
-}
-
-.admin-title {
-  display: block;
-  font-size: 10px;
-  font-weight: bold;
-  color: #16548a;
-  margin-bottom: 7px;
-}
-
-.admin-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.admin-btn {
-  width: 100%;
-  padding: 4px;
-  font-size: 10px;
-  color: #ffffff;
-  background-color: #5c7891;
-  border: 1px solid #46596b;
-}
-
-.admin-btn:hover {
-  background-color: #16548a;
-}
-
-.admin-btn.active {
-  background-color: #16548a;
-  font-weight: bold;
-}
-
-.admin-links {
-  display: flex;
-  flex-direction: column;
-  margin-top: 7px;
-  font-size: 10px;
-}
-
-.admin-links a {
-  padding: 2px 0;
-}
-
 /* ---------- Mobile ---------- */
 @media (max-width: 700px) {
   .content {
@@ -383,7 +338,7 @@ button {
     gap: 12px;
   }
 
-  .panel {
+  .card {
     flex: 1 1 auto;
     width: 100%;
   }
@@ -413,7 +368,10 @@ button {
     padding-top: 0;
   }
 
-  .admin-panel {
-    width: 150px;
+  /* Keep hints inside the card on narrow screens */
+  .input-wrap[data-hint]:hover::after,
+  .req[data-hint]:hover::after {
+    white-space: normal;
+    width: 170px;
   }
 }

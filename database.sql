@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS students (
 
 -- Sample rows (optional)
 INSERT INTO students (firstName, lastName, email, program) VALUES
-('Alice', 'Nguyen', 'alice.nguyen@college.edu', 'Computer Science'),
-('Ben', 'Carter', 'ben.carter@college.edu', 'Business Administration');
+('Mary', 'Karim', 'mary.karim@college.edu', 'Computer Science'),
+('Rahul', 'Tylor', 'rahul.tylor@college.edu', 'Software Engineering');

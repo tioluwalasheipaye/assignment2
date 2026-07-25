@@ -76,19 +76,21 @@ function StudentForm(props) {
       });
   }
 
-  function field(id, label, value, setValue) {
+  function field(id, label, value, setValue, hint) {
     return (
       <div className="field-row">
         <label htmlFor={id}>
-          {label} <span className="req">*</span>
+          {label} <span className="req" data-hint="Required field">*</span>
         </label>
         <div className="field-input">
-          <input
-            id={id}
-            type="text"
-            value={value}
-            onChange={function (e) { setValue(e.target.value); }}
-          />
+          <span className="input-wrap" data-hint={hint}>
+            <input
+              id={id}
+              type="text"
+              value={value}
+              onChange={function (e) { setValue(e.target.value); }}
+            />
+          </span>
           {errors[id] && <span className="error">{errors[id]}</span>}
         </div>
       </div>
@@ -96,13 +98,13 @@ function StudentForm(props) {
   }
 
   return (
-    <section className="panel">
-      <div className="panel-head">Student Registration</div>
+    <section className="card">
+      <div className="card-head">Student Registration</div>
 
-      <div className="panel-body">
+      <div className="card-body">
         <p className="instructions">
           Complete all required fields marked with <span className="req">*</span> and
-          select <strong>Submit</strong> to register.
+          select <strong>Register</strong> to submit.
         </p>
 
         {message && (
@@ -112,13 +114,17 @@ function StudentForm(props) {
         )}
 
         <form onSubmit={handleSubmit} noValidate>
-          {field("firstName", "First Name", firstName, setFirstName)}
-          {field("lastName", "Last Name", lastName, setLastName)}
-          {field("email", "Email Address", email, setEmail)}
-          {field("program", "Program of Study", program, setProgram)}
+          {field("firstName", "First Name", firstName, setFirstName,
+            "Your given name as it appears on your ID, e.g. Mary")}
+          {field("lastName", "Last Name", lastName, setLastName,
+            "Your family name, e.g. Karim")}
+          {field("email", "Email Address", email, setEmail,
+            "Must contain @, e.g. mary.karim@college.edu")}
+          {field("program", "Program of Study", program, setProgram,
+            "Full program name, e.g. Computer Science")}
 
           <div className="form-actions">
-            <button type="submit" className="quest-btn">Submit</button>
+            <button type="submit" className="quest-btn">Register</button>
           </div>
         </form>
       </div>

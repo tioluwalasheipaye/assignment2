@@ -1,69 +1,38 @@
 function App() {
   const { useState } = React;
 
+  // Page 1 = Student Registration, Page 2 = Student Directory.
+  const [page, setPage] = useState("register");
+
   // Bumped after a successful registration so StudentList re-fetches.
   const [refresh, setRefresh] = useState(0);
 
-  // Admin mode: lets you view each part of the app on its own for testing.
-  // The student list is intentionally NOT part of the public page.
-  const [adminMode, setAdminMode] = useState(false);
-  const [view, setView] = useState("form");
+  // Dev-only admin flag (see dev-temp.jsx); stays false in the delivered app.
+  const [admin, setAdmin] = useState(false);
+
+  function handleNavigate(nextPage) {
+    setPage(nextPage);
+  }
 
   function handleRegistered() {
     setRefresh(function (previous) { return previous + 1; });
   }
 
-  const views = [
-    { key: "form", label: "Registration Form" },
-    { key: "list", label: "Student List" },
-    { key: "both", label: "Both" }
-  ];
-
-  const showForm = !adminMode || view === "form" || view === "both";
-  const showList = adminMode && (view === "list" || view === "both");
+  const showForm = page === "register" || page === "both";
+  const showList = page === "directory" || page === "both";
 
   return (
     <div className="app">
-      <button
-        className="admin-toggle"
-        onClick={function () { setAdminMode(!adminMode); }}
-      >
-        {adminMode ? "Exit Admin" : "Admin"}
-      </button>
-
-      {adminMode && (
-        <div className="admin-panel">
-          <span className="admin-title">Admin / Test Mode</span>
-
-          <div className="admin-buttons">
-            {views.map(function (item) {
-              return (
-                <button
-                  key={item.key}
-                  className={view === item.key ? "admin-btn active" : "admin-btn"}
-                  onClick={function () { setView(item.key); }}
-                >
-                  {item.label}
-                </button>
-              );
-            })}
-
-            <button
-              className="admin-btn"
-              onClick={function () { setRefresh(refresh + 1); }}
-            >
-              Reload List
-            </button>
-          </div>
-
-          <div className="admin-links">
-            <a href="students.php" target="_blank" rel="noreferrer">students.php</a>
-            <a href="register.php" target="_blank" rel="noreferrer">register.php</a>
-          </div>
-        </div>
+      {typeof AdminTools !== "undefined" && (
+        <AdminTools
+          page={page}
+          onNavigate={handleNavigate}
+          onReload={handleRegistered}
+          onAdminChange={setAdmin}
+        />
       )}
 
-      <Header />
+      <Header page={page} onNavigate={handleNavigate} admin={admin} />
 
       <main className="content">
         {showForm && <StudentForm onRegistered={handleRegistered} />}

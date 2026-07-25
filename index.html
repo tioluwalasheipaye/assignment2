@@ -14,6 +14,9 @@
 <body>
   <div id="root"></div>
 
+  <!-- DEV ONLY: admin/test panel. Delete this line with dev-temp.jsx. -->
+  <script type="text/babel" src="dev-temp.jsx"></script>
+
   <!-- Components first, App last -->
   <script type="text/babel" src="Header.jsx"></script>
   <script type="text/babel" src="Footer.jsx"></script>
@@ -21,8 +24,8 @@
   <script type="text/babel" src="StudentList.jsx"></script>
   <script type="text/babel" src="App.jsx"></script>
 
-  <!-- Dev live-reload: polls dev.php and refreshes when a file changes.
-       Localhost only. Delete this block (and dev.php) before submitting. -->
+  <!-- DEV ONLY: live reload. Polls dev-temp.php and refreshes on any file
+       change. Localhost only. Delete this block with dev-temp.php. -->
   <script>
     (function () {
       var host = location.hostname;

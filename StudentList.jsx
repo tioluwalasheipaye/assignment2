@@ -21,10 +21,10 @@ function StudentList(props) {
   }, [props.refresh]);
 
   return (
-    <section className="panel">
-      <div className="panel-head">Registered Students (Staff View)</div>
+    <section className="card">
+      <div className="card-head">Student Directory</div>
 
-      <div className="panel-body">
+      <div className="card-body">
         {status === "loading" && <p className="instructions">Loading students...</p>}
 
         {status === "error" && (

@@ -1,4 +1,4 @@
-function Header() {
+function Header(props) {
   return (
     <header className="header">
       <div className="masthead">
@@ -7,9 +7,24 @@ function Header() {
         </div>
       </div>
 
-      <div className="breadcrumb">
-        Enrolment &gt; Add a Student &gt; <strong>Student Registration</strong>
-      </div>
+      <nav className="tabs">
+        <span
+          className={props.page === "register" ? "tab active" : "tab"}
+          onClick={function () { props.onNavigate("register"); }}
+        >
+          Student Registration
+        </span>
+
+        {/* The directory is staff-only, so the tab shows in admin mode only. */}
+        {props.admin && (
+          <span
+            className={props.page === "directory" ? "tab active" : "tab"}
+            onClick={function () { props.onNavigate("directory"); }}
+          >
+            Student Directory
+          </span>
+        )}
+      </nav>
     </header>
   );
 }
