@@ -1,72 +1,27 @@
 # Student Registration System
 
-A small web app for registering students and viewing the ones already registered.
-React on the front, PHP and MySQL on the back.
-
-## What you need
-
-- PHP 8 with the `pdo_mysql` extension turned on
-- MySQL (XAMPP works fine)
-
-If you get `{"status":"error"}` on every submit, check `pdo_mysql` first. Run:
-
-```
-php -r "echo implode(',', PDO::getAvailableDrivers());"
-```
-
-If that prints nothing, PHP can't talk to MySQL and you need to enable the
-extension in your `php.ini`. Everything else will look fine, which makes it
-annoying to track down.
+Register students and view the list. React on the front, PHP and MySQL behind it.
 
 ## Setup
 
-Start MySQL, then load the schema:
+You need PHP 8 and MySQL. Load the database:
 
-```
+```sh
 mysql -u root < database.sql
 ```
 
-That creates the `college` database, the `students` table, and drops in two
-sample rows.
+Then run the app from the project folder:
 
-The database login is hardcoded at the top of `register.php` and `students.php`
-(`root`, no password). Change it there if yours is different.
-
-## Running it
-
-From the project folder:
-
-```
+```sh
 php -S localhost:8000
 ```
 
-Then open http://localhost:8000.
-
-You can also drop the folder in `htdocs` and use Apache instead. Either way
-works, the paths are all relative.
-
-## Files
-
-| File | What it does |
-| --- | --- |
-| `index.html` | Page shell, loads React and Babel from a CDN |
-| `App.jsx` | Switches between the form and the list |
-| `Header.jsx` / `Footer.jsx` | Nav and footer |
-| `StudentForm.jsx` | Registration form, posts to `register.php` |
-| `StudentList.jsx` | Table of students, reads from `students.php` |
-| `register.php` | Validates and inserts a student |
-| `students.php` | Returns all students as JSON |
-| `database.sql` | Schema and sample data |
-| `style.css` | Styles |
-
-`dev-temp.jsx` and `dev-temp.php` are just dev helpers. `dev-temp.php` hashes
-the file timestamps so the page can auto-reload when you save something. It
-only answers requests from localhost. Neither is needed for the app to work.
+Open <http://localhost:8000>.
 
 ## Notes
 
-Babel compiles the JSX in the browser, so there's no build step. That's handy
-for development but slow, and you wouldn't ship it that way.
+The DB login is at the top of `register.php` and `students.php` (`root`, no
+password). Change it if yours is different.
 
-Both PHP files swallow the real error message and just return `error`. Fine for
-an assignment, but it does make debugging harder than it should be.
+If every submit fails, check that `pdo_mysql` is enabled in your `php.ini`.
+Nothing else will look wrong, so it's easy to miss.
